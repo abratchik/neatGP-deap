@@ -1,0 +1,9 @@
+database_name: "housing.txt"
+tournament_size: 7
+num_var: 13
+
+neat_cx: False
+neat_alg: True
+neat_pelit: 0.5
+neat_h: 0.15
+neat_beta: 0.5

@@ -1,6 +1,6 @@
 class neat:
-    #propiedades de la especiacion
-    #cambio para neat
+    # properties of speciation
+    # change for NEAT
     def specie(self,sp):
         self.tspecie=sp
 
