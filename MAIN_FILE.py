@@ -48,32 +48,33 @@ def train_test(n_corr, p, problem, name_database, toolbox, config):
             num_c = sum(1 for line in open(direccion))
             num_r = len(next(csv.reader(open(direccion), delimiter=' ', skipinitialspace=True)))
             Matrix = np.empty((num_r, num_c,))
-            for row, c in zip(spamReader, range(num_c)):
+            for row, c in zip(spamReader, list(range(num_c))):
                 for r in range(num_r):
                     try:
                         Matrix[r, c] = row[r]
                     except ValueError:
-                        print 'Line {r} is corrupt', r
+                        print('Line {r} is corrupt', r)
                         break
         if not os.path.exists(n_archivo):
             long_train=int(len(Matrix.T)*.7)
-            data_train1 = random.sample(Matrix.T, long_train)
+            data_train1 = Matrix.T[np.random.choice(Matrix.T.shape[0], long_train, replace=False)]
             np.savetxt(n_archivo, data_train1, delimiter=",", fmt="%s")
         if not os.path.exists(n_archivot):
             long_test=int(len(Matrix.T)*.3)
-            data_test1 = random.sample(Matrix.T, long_test)
+            print("long_test %s" % (long_test,))
+            data_test1 = Matrix.T[np.random.choice(Matrix.T.shape[0], long_test, replace=False)]
             np.savetxt(n_archivot, data_test1, delimiter=",", fmt="%s")
     with open(n_archivo) as spambase:
         spamReader = csv.reader(spambase,  delimiter=',', skipinitialspace=True)
         num_c = sum(1 for line in open(n_archivo))
         num_r = len(next(csv.reader(open(n_archivo), delimiter=',', skipinitialspace=True)))
         Matrix = np.empty((num_r, num_c,))
-        for row, c in zip(spamReader, range(num_c)):
+        for row, c in zip(spamReader, list(range(num_c))):
             for r in range(num_r):
                 try:
                     Matrix[r, c] = row[r]
                 except ValueError:
-                    print 'Line {r} is corrupt train' , r
+                    print('Line {r} is corrupt train' , r)
                     break
         data_train=Matrix[:]
     with open(n_archivot) as spambase:
@@ -81,12 +82,12 @@ def train_test(n_corr, p, problem, name_database, toolbox, config):
         num_c = sum(1 for line in open(n_archivot))
         num_r = len(next(csv.reader(open(n_archivot), delimiter=',', skipinitialspace=True)))
         Matrix = np.empty((num_r, num_c,))
-        for row, c in zip(spamReader, range(num_c)):
+        for row, c in zip(spamReader, list(range(num_c))):
             for r in range(num_r):
                 try:
                     Matrix[r, c] = row[r]
                 except ValueError:
-                    print 'Line {r} is corrupt test' , r
+                    print('Line {r} is corrupt test' , r)
                     break
         data_test=Matrix[:]
     toolbox.register("evaluate", evalSymbReg, points=data_train, toolbox=toolbox, config=config)
@@ -156,7 +157,7 @@ def main(n_corr, p, problem, database_name, pset, config):
 
 if __name__ == "__main__":
 
-    config        = yaml.load(open("conf/conf.yaml"))
+    config        = yaml.safe_load(open("conf/conf.yaml"))
     problem       = config["problem"]
     num_var       = config["num_var"]
     database_name = config["db_name"]

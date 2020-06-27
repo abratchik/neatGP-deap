@@ -1,4 +1,4 @@
-from __future__ import division
+
 
 
 def initRepeat(container, func, n):
@@ -23,7 +23,7 @@ def initRepeat(container, func, n):
     """
     if container==list:
         pop=[]
-        for x in xrange(n):
+        for x in range(n):
             ind=func()
             if ind in pop:
                 n1=0
@@ -41,4 +41,4 @@ def initRepeat(container, func, n):
         container=pop
         return container
     else:
-        return container(func() for _ in xrange(n))
+        return container(func() for _ in range(n))

@@ -65,8 +65,8 @@ def num_desc(ind, avg):
         int1=1
     numd=round(avg/int1)
     if np.isnan(numd):
-        print avg
-        print int1
+        print(avg)
+        print(int1)
     return int(numd)
 
 def avg(population):
@@ -108,14 +108,16 @@ def eliminar_ind(gpo_specie, survival):
 
 def penalizar_ind(gpo_specie, survival):
     sort_gpo=sort_fitness(gpo_specie)
+    #print(sort_gpo)
     indice=int(round(len(sort_gpo)-(len(sort_gpo)*survival)))
     #reverse_gpo=sorted(sort_gpo, key=lambda ind:ind[1],reverse=True)
     reverse_gpo=sort_gpo
     if len(reverse_gpo)>1:
         for i in range(indice):
-            reverse_gpo[i][0].fitness.values=999999999.00,
-            reverse_gpo[i][1]=999999999.00
+            reverse_gpo[i][0].fitness.values=(999999999.00,)
+            reverse_gpo[i][1]=(999999999.00,)
             reverse_gpo[i][2]=999999999.00
+    #print(reverse_gpo)
     sort_gpo=sorted(reverse_gpo, key=lambda ind:ind[1])
     parnt=list()
     for i in range(len(sort_gpo)):

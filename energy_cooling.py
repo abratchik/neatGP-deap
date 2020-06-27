@@ -58,12 +58,12 @@ def energy_coolng(n_corr, num_p, problem, name_database):
             num_c = sum(1 for line in open(direccion))
             num_r = len(next(csv.reader(open(direccion), delimiter=' ', skipinitialspace=True)))
             Matrix = np.empty((num_r, num_c,))
-            for row, c in zip(spamReader, range(num_c)):
+            for row, c in zip(spamReader, list(range(num_c))):
                 for r in range(num_r):
                     try:
                         Matrix[r, c] = row[r]
                     except ValueError:
-                        print 'Line {r} is corrupt', r
+                        print('Line {r} is corrupt', r)
                         break
         if not os.path.exists(n_archivo):
             long_train=int(len(Matrix.T)*.7)
@@ -79,12 +79,12 @@ def energy_coolng(n_corr, num_p, problem, name_database):
         num_c = sum(1 for line in open(n_archivo))
         num_r = len(next(csv.reader(open(n_archivo), delimiter=',', skipinitialspace=True)))
         Matrix = np.empty((num_r, num_c,))
-        for row, c in zip(spamReader, range(num_c)):
+        for row, c in zip(spamReader, list(range(num_c))):
             for r in range(num_r):
                 try:
                     Matrix[r, c] = row[r]
                 except ValueError:
-                    print 'Line {r} is corrupt' , r
+                    print('Line {r} is corrupt' , r)
                     break
         data_train=Matrix[:]
     with open(n_archivot) as spambase:
@@ -92,12 +92,12 @@ def energy_coolng(n_corr, num_p, problem, name_database):
         num_c = sum(1 for line in open(n_archivot))
         num_r = len(next(csv.reader(open(n_archivot), delimiter=',', skipinitialspace=True)))
         Matrix = np.empty((num_r, num_c,))
-        for row, c in zip(spamReader, range(num_c)):
+        for row, c in zip(spamReader, list(range(num_c))):
             for r in range(num_r):
                 try:
                     Matrix[r, c] = row[r]
                 except ValueError:
-                    print 'Line {r} is corrupt' , r
+                    print('Line {r} is corrupt' , r)
                     break
         data_test=Matrix[:]
     toolbox.register("evaluate", evalSymbReg, test=False, points=data_train)

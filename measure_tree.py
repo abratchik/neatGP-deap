@@ -1,4 +1,4 @@
-from __future__ import division
+
 from deap import base, creator, gp, tools
 
 

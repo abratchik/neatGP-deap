@@ -17,7 +17,7 @@ def varOr(population, toolbox, cxpb, mutpb):
     offspring = []
     for i in range(1, len(new_pop), 2):
         new_pop[i-1].off_cx_set(0), new_pop[i].off_cx_set(0)
-        if random.random() < cxpb and len(ind)>1:
+        if random.random() < cxpb: # and len(ind)>1:
             new_pop[i-1].off_cx_set(1)
             new_pop[i].off_cx_set(1)
             offspring1, offspring2 = toolbox.mate(new_pop[i-1], new_pop[i])
@@ -188,8 +188,8 @@ def neat_GP( population, toolbox, cxpb, mutpb, ngen, neat_alg, neat_cx, neat_h, 
 
     #  take the best on the population
     best_ind = best_pop(population)
-    fitnesst_best = toolbox.map(toolbox.evaluate_test, [best_ind])
-    best_ind.fitness_test.values=fitnesst_best[0]
+    fitnesst_best = list(toolbox.map(toolbox.evaluate_test, [best_ind]))
+    best_ind.fitness_test.values = fitnesst_best[0]
     best.write('\n%s;%s;%s;%s;%s' % (0, best_ind.fitness_test.values[0], best_ind.fitness.values[0], len(best_ind), avg_nodes(population)))
     best_st.write('\n%s;%s' % (0, best_ind))
 
@@ -202,7 +202,7 @@ def neat_GP( population, toolbox, cxpb, mutpb, ngen, neat_alg, neat_cx, neat_h, 
     record = stats.compile(population) if stats else {}
     logbook.record(gen=0, nevals=len(invalid_ind), **record)
     if verbose:
-        print logbook.stream
+        print(logbook.stream)
 
     # Begin the generational process
     for gen in range(1, ngen+1):
@@ -256,10 +256,10 @@ def neat_GP( population, toolbox, cxpb, mutpb, ngen, neat_alg, neat_cx, neat_h, 
         record = stats.compile(population) if stats else {}
         logbook.record(gen=gen, nevals=len(population), **record)
         if verbose:
-            print logbook.stream
+            print(logbook.stream)
 
         best_ind = best_pop(population)
-        fitnesses_test = toolbox.map(toolbox.evaluate_test, [best_ind])
+        fitnesses_test = list(toolbox.map(toolbox.evaluate_test, [best_ind]))
         best_ind.fitness_test.values = fitnesses_test[0]
         best.write('\n%s;%s;%s;%s;%s'%(gen, best_ind.fitness_test.values[0], best_ind.fitness.values[0], len(best_ind), avg_nodes(population)))
         best_st.write('\n%s;%s' % (gen, best_ind))

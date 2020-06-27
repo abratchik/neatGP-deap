@@ -3,7 +3,7 @@ from speciation import *
 #determinados, de algun punto de la iniciacion
 def print_fit(population):
     for ind in population:
-        print ind.fitness.values
+        print(ind.fitness.values)
 
 def SpeciesPunishment(population,params,h):
     salvar=params[0] #params.DontPenaliza
@@ -35,7 +35,7 @@ def SpeciesPunishment(population,params,h):
         nodos_mejor=9999999999
         level_mejor=9999999999
 
-        for ind, i in population, range(population):
+        for ind, i in population, list(range(population)):
             if ind.fitness.values[0]<fitness_mejor:
                 id_mejor=i
                 fitness_mejor=ind.fitness.values[0]
@@ -64,7 +64,7 @@ def SpeciesPunishment(population,params,h):
             fitness_mejor=9999999999.00
             nodos_mejor=9999999999
             level_mejor=9999999999
-            for ind, i in zip(population, range(len(population))):
+            for ind, i in zip(population, list(range(len(population)))):
                 if ind.get_specie()==e[0]:
                     contador+=1
                     if ind.fitness.values[0]<fitness_mejor:

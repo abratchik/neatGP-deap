@@ -35,13 +35,13 @@ with open(direccion) as spambase:
     num_c = sum(1 for line in open(direccion))
     num_r = len(next(csv.reader(open(direccion), delimiter=',', skipinitialspace=True)))
     Matrix = np.empty((num_r, num_c,))
-    for row, c in zip(spamReader, range(num_c)):
+    for row, c in zip(spamReader, list(range(num_c))):
         for r in range(num_r):
             try:
                 #print row[r]
                 Matrix[r, c] = row[r]
             except ValueError:
-                print 'Line {r} is corrupt' , r
+                print('Line {r} is corrupt' , r)
                 break
 
 # defined a new primitive set for strongly typed GP

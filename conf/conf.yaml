@@ -1,5 +1,5 @@
 benchmark: false
-problem: "Housing"
+problem: "SMT"
 num_var: 13
 n_problem: 2113
 db_name: "housing.txt"

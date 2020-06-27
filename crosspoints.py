@@ -80,14 +80,14 @@ def int_node(ind1, ind2):
                     slice1=copia.searchSubtree(cont1)
                     copia[1:]=copia[slice1]
                     long=len(copia)-1
-                    cont1+=long
+                    cont1+=int
                     cont2+=1
                 elif ind2[cont2].arity>0:
                     copia=copy.deepcopy(ind2)
                     slice1=copia.searchSubtree(cont2)
                     copia[1:]=copia[slice1]
                     long=len(copia)-1
-                    cont2+=long
+                    cont2+=int
                     cont1+=1
     return label1,label2
 
@@ -134,14 +134,14 @@ def ext_node(ind1, ind2):
                         slice1=copia.searchSubtree(cont1)
                         copia[1:]=copia[slice1]
                         long=len(copia)-1
-                        cont1+=long
+                        cont1+=int
                         cont2+=1
                     elif ind2[cont2].arity>0:
                         copia=copy.deepcopy(ind2)
                         slice1=copia.searchSubtree(cont2)
                         copia[1:]=copia[slice1]
                         long=len(copia)-1
-                        cont2+=long
+                        cont2+=int
                         cont1+=1
     return edg1,edg2
 
